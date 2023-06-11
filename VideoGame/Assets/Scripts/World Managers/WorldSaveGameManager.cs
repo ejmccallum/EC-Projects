@@ -35,5 +35,10 @@ namespace EC
 
             yield return null;
         }
+
+        public int GetWorldSceneIndex()
+        {
+            return worldSceneIndex;
+        }
     }
 }
