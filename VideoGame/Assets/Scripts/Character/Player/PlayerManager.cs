@@ -7,7 +7,8 @@ namespace EC
     public class PlayerManager : CharacterManager
     {
 
-        PlayerLocomotionManager playerLocomotionManager;
+        [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
+        [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
 
         protected override void Awake()
         {
@@ -15,6 +16,7 @@ namespace EC
 
             // Use inherited Awake() method, and then specify the PlayerManager's personal instructions
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
 
 
         }
@@ -42,6 +44,7 @@ namespace EC
             if(IsOwner)
             {
                 PlayerCamera.instance.player = this;
+                PlayerInputManager.instance.player = this;
             }
 
             // Handle all movement

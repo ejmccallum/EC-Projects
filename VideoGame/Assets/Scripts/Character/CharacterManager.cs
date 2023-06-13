@@ -8,15 +8,16 @@ namespace EC
     public class CharacterManager : NetworkBehaviour
     {
 
-        public CharacterController characterController;
-
-        public CharacterNetworkManager characterNetworkManager;
+        [HideInInspector] public CharacterController characterController;
+        [HideInInspector] public Animator animator;
+        [HideInInspector] public CharacterNetworkManager characterNetworkManager;
 
         protected virtual void Awake()
         {
             DontDestroyOnLoad(this);
 
             characterController = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
         }
 
@@ -49,7 +50,7 @@ namespace EC
 
         protected virtual void LateUpdate()
         {
-            
+
         }
     }
 }
