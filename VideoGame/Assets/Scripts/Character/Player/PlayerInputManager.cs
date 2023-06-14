@@ -9,6 +9,7 @@ namespace EC
     {
 
         public static PlayerInputManager instance;
+        public PlayerManager player;
 
         PlayerControls playerControls;
 
@@ -113,6 +114,16 @@ namespace EC
             {
                 moveAmount = 1;
             }
+
+            if(player == null)
+            {
+                return;
+            }
+
+            //Why pass a 0 for horizontalInput? Because we don't want to rotate the player based on the camera's horizontal input until strafing is implemented
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(moveAmount, 0);
+
+            
 
         }
 

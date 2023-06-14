@@ -28,6 +28,31 @@ namespace EC
             player = GetComponent<PlayerManager>();
         }
 
+        protected override void Update()
+        {
+            base.Update();
+
+            // If this is not the owner of the character, then do not handle movement
+            if(player.IsOwner)
+            {
+                player.characterNetworkManager.verticalMovement.Value = verticalMovement;
+                player.characterNetworkManager.horizontalMovement.Value = horizontalMovement;
+                player.characterNetworkManager.moveAmount.Value = moveAmount;
+            }
+            else
+            {
+                verticalMovement = player.characterNetworkManager.verticalMovement.Value;
+                horizontalMovement = player.characterNetworkManager.horizontalMovement.Value;
+                moveAmount = player.characterNetworkManager.moveAmount.Value;
+
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(moveAmount, 0);
+            }
+
+            // Handle all movement
+            HandleAllMovement();
+
+        }
+
         public void HandleAllMovement()
         {
             //Handle ground movement
@@ -39,6 +64,8 @@ namespace EC
         {
             verticalMovement = PlayerInputManager.instance.verticalInput;
             horizontalMovement = PlayerInputManager.instance.horizontalInput;
+
+            moveAmount = PlayerInputManager.instance.moveAmount;
 
         }
 
