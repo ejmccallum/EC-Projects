@@ -12,5 +12,10 @@ namespace EC
             
         }
 
+        protected virtual void Update()
+        {
+            
+        }
+
     }
 }
