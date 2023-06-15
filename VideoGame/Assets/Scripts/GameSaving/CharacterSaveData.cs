@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class CharacterSaveData : MonoBehaviour
+namespace EC
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [System.Serializable]
 
-    // Update is called once per frame
-    void Update()
+    public class CharacterSaveData
     {
-        
+        [Header("Character Name")]
+        public string characterName;
+
+        [Header("Time Played")]
+        public float secondsPlayed;
+
+        [Header("World Position")]
+        public float xPosition;
+        public float yPosition;
+        public float zPosition;
+
     }
 }
