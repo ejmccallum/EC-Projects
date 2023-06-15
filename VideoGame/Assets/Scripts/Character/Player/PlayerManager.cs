@@ -19,6 +19,7 @@ namespace EC
 
             // Use inherited Awake() method, and then specify the PlayerManager's personal instructions
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
 
 
         }
@@ -46,6 +47,7 @@ namespace EC
             if(IsOwner)
             {
                 PlayerCamera.instance.player = this;
+                PlayerInputManager.instance.player = this;
             }
 
             // Handle all movement
