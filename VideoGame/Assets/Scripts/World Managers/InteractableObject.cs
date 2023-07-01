@@ -7,14 +7,16 @@ namespace EC
     public class InteractableObject : MonoBehaviour
     {
         public string itemName;
-        public bool playerInRange = true;
+        public bool playerInRange;
 
         public string GetItemName()
         {
             return itemName;
         }
 
-        private void OnTriggerEvent(Collider other)
+        
+
+        private void OnTriggerEnter(Collider other)
         {
             if(other.CompareTag("Player"))
             {
@@ -30,5 +32,6 @@ namespace EC
             }
         }
 
+        
     }
 }

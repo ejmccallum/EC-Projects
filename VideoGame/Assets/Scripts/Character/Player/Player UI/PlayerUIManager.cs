@@ -10,13 +10,7 @@ namespace EC
     {
         public static PlayerUIManager instance;
         public GameObject interactionUI;
-        //Text interactionText;
         Text interactionText;
-        
-
-
-        [Header("NETWORK JOIN")]
-        [SerializeField] bool startGameAsClient;
 
         private void Awake()
         {
@@ -37,20 +31,15 @@ namespace EC
         }
         private void Update()
         {
-            if (startGameAsClient)
-            {
-                startGameAsClient = false;
-                NetworkManager.Singleton.Shutdown();
-                NetworkManager.Singleton.StartClient();
-            }
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
                 var selectionTransform = hit.transform;
+                
 
-                if(selectionTransform.GetComponent<InteractableObject>() )
+                if(selectionTransform.GetComponent<InteractableObject>() && selectionTransform.GetComponent<InteractableObject>().playerInRange == true)
                 {
                     
                     interactionText.text = hit.transform.GetComponent<InteractableObject>().GetItemName();
