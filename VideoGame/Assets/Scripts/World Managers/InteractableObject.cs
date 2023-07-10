@@ -7,11 +7,36 @@ namespace EC
     public class InteractableObject : MonoBehaviour
     {
         public string itemName;
+        public string addedToInventoryText;
         public bool playerInRange;
+        public bool isPickup;
 
         public string GetItemName()
         {
             return itemName;
+        }
+
+        public string GetAddedToInventoryText()
+        {
+            return addedToInventoryText;
+        }
+
+        void Update()
+        {
+
+            if(playerInRange && Input.GetKeyDown(KeyCode.E) && PlayerUIManager.instance.onTarget)
+            {
+                isPickup = true;
+                
+                Interact();
+
+            }
+        }
+
+        private void Interact()
+        {
+
+            Destroy(gameObject);
         }
 
         

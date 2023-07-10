@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Stone
+  addedToInventoryText: +1 Stone
   playerInRange: 0
+  isPickup: 0
 --- !u!65 &-639983136863615175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -120,8 +122,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.79, y: 4.22, z: 7.74}
-  m_Center: {x: 0, y: 1.92, z: 0}
+  m_Size: {x: 11.3, y: 8.71, z: 10.59}
+  m_Center: {x: 0, y: 4.92, z: 0}
 --- !u!65 &6749141940462868753
 BoxCollider:
   m_ObjectHideFlags: 0

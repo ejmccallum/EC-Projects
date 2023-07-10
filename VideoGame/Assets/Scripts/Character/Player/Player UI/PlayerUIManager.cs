@@ -8,7 +8,10 @@ namespace EC
 {   
     public class PlayerUIManager : MonoBehaviour
     {
-        public static PlayerUIManager instance;
+
+
+        public static PlayerUIManager instance{get; set;}
+        public bool onTarget;
         public GameObject interactionUI;
         Text interactionText;
 
@@ -26,6 +29,7 @@ namespace EC
 
         private void Start()
         {
+            onTarget = false;
             interactionText = interactionUI.GetComponent<Text>();
             DontDestroyOnLoad(gameObject);
         }
@@ -37,22 +41,31 @@ namespace EC
             if (Physics.Raycast(ray, out hit))
             {
                 var selectionTransform = hit.transform;
-                
 
-                if(selectionTransform.GetComponent<InteractableObject>() && selectionTransform.GetComponent<InteractableObject>().playerInRange == true)
+                InteractableObject interactableObject = selectionTransform.GetComponent<InteractableObject>();
+                
+                if(interactableObject && interactableObject.playerInRange)
                 {
-                    
-                    interactionText.text = hit.transform.GetComponent<InteractableObject>().GetItemName();
+                    onTarget = true;
+
+                    interactionText.text = interactableObject.GetItemName();
                     interactionUI.SetActive(true);
+
+                    if(interactableObject.isPickup == true)
+                    {
+                        interactableObject.GetAddedToInventoryText();
+                    }
                 }    
                 else
                 {
+                    onTarget = false;
                     interactionUI.SetActive(false);
                 }
 
             }
             else
             {
+                onTarget = false;
                 interactionUI.SetActive(false);
             }
         }   
