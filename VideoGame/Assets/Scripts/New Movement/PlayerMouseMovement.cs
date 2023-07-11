@@ -8,12 +8,16 @@ namespace EC
     {
         public float mouseSensitivity = 100f;
 
+        bool inventoryIsOpen = false;
+
         float xRotation = 0f;
         float yRotation = 0f;
 
         void Start()
         {
+
             Cursor.lockState = CursorLockMode.Locked;
+            
         }
 
         void Update()
@@ -28,6 +32,19 @@ namespace EC
             yRotation += mouseX;
 
             transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+
+            if(Input.GetKeyDown(KeyCode.I) && !inventoryIsOpen)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                inventoryIsOpen = true;
+            }
+            else if(Input.GetKeyDown(KeyCode.I) && inventoryIsOpen)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                inventoryIsOpen = false;
+            }
+
+            
         }
     }
 }
