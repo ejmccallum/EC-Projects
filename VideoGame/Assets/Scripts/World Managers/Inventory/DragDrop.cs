@@ -8,7 +8,7 @@ namespace EC
 {
     public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
-        [SerializeField] private Canvas canvas;
+        
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
 

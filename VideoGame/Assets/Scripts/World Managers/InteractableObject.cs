@@ -36,6 +36,7 @@ namespace EC
         private void Interact()
         {
 
+            InventorySystem.Instance.AddItemToInventory(GetItemName());
             Destroy(gameObject);
         }
 

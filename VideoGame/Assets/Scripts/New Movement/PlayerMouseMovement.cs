@@ -22,27 +22,26 @@ namespace EC
 
         void Update()
         {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-            xRotation -= mouseY;
-
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-            yRotation += mouseX;
-
-            transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-
-            if(Input.GetKeyDown(KeyCode.I) && !inventoryIsOpen)
+            if (InventorySystem.Instance.inventoryIsOpen)
             {
                 Cursor.lockState = CursorLockMode.None;
-                inventoryIsOpen = true;
             }
-            else if(Input.GetKeyDown(KeyCode.I) && inventoryIsOpen)
+            else
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                inventoryIsOpen = false;
+                float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+                float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+                xRotation -= mouseY;
+
+                xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+                yRotation += mouseX;
+
+                transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
             }
+
 
             
         }
