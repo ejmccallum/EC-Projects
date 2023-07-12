@@ -29,6 +29,7 @@ namespace EC
             canvasGroup.blocksRaycasts = false;
             startPosition = transform.position;
             startParent = transform.parent;
+            transform.SetParent(transform.root);
             itemBeingDragged = gameObject;
         }
 
