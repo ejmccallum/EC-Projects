@@ -8,7 +8,6 @@ namespace EC
     {
         public float mouseSensitivity = 100f;
 
-        bool inventoryIsOpen = false;
 
         float xRotation = 0f;
         float yRotation = 0f;
@@ -23,7 +22,7 @@ namespace EC
         void Update()
         {
 
-            if (InventorySystem.Instance.inventoryIsOpen)
+            if (InventorySystem.Instance.inventoryIsOpen && CraftingSystem.Instance.craftingScreenIsOpen)
             {
                 Cursor.lockState = CursorLockMode.None;
             }

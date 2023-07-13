@@ -9,7 +9,7 @@ namespace EC
         public string itemName;
         public string addedToInventoryText;
         public bool playerInRange;
-        public bool isPickup;
+        //public bool isPickup;
 
         public string GetItemName()
         {
@@ -24,19 +24,28 @@ namespace EC
         void Update()
         {
 
-            if(playerInRange && Input.GetKeyDown(KeyCode.E) && PlayerUIManager.instance.onTarget)
+            if(playerInRange && Input.GetKeyDown(KeyCode.E) 
+                && PlayerUIManager.instance.onTarget 
+                && PlayerUIManager.instance.selectedObject == gameObject)
             {
-                isPickup = true;
+                //isPickup = true;
+                if(InventorySystem.Instance.CheckIfInventoryIsFull() == false)
+                {
+                    AddItemToInventory();
+                }
+                else
+                {
+                    Debug.Log("Inventory is full");
+                }
                 
-                Interact();
 
             }
         }
 
-        private void Interact()
+        private void AddItemToInventory()
         {
 
-            InventorySystem.Instance.AddItemToInventory(GetItemName());
+            InventorySystem.Instance.AddItemToInventory(itemName);
             Destroy(gameObject);
         }
 

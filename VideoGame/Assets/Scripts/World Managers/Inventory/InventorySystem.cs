@@ -18,8 +18,8 @@ namespace EC
         private GameObject itemToAdd;
         private GameObject slotToAddTo;
 
-        public bool inventoryIsFull = false;
         public bool inventoryIsOpen;
+        public bool inventoryIsFull;
     
     
         private void Awake()
@@ -52,43 +52,47 @@ namespace EC
     
                 Debug.Log("i is pressed");
                 inventoryScreenUI.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
                 inventoryIsOpen = true;
     
             }
             else if (Input.GetKeyDown(KeyCode.I) && inventoryIsOpen)
             {
                 inventoryScreenUI.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
                 inventoryIsOpen = false;
             }
         }
 
         public void AddItemToInventory(string itemName)
         {
-            if(CheckIfInventoryIsFull())
-            {
-                Debug.Log("Inventory is full");
-                return;
-            }
-            else
-            {
-               slotToAddTo = FindNextAvailableSlot();
-               itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), slotToAddTo.transform.position, slotToAddTo.transform.rotation);
-                itemToAdd.transform.SetParent(slotToAddTo.transform);
 
-                itemList.Add(itemName);
-            }
+            slotToAddTo = FindNextAvailableSlot();
+            itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), slotToAddTo.transform.position, slotToAddTo.transform.rotation);
+            itemToAdd.transform.SetParent(slotToAddTo.transform);
+
+            itemList.Add(itemName);
+
         }
 
-        private bool CheckIfInventoryIsFull()
+        public bool CheckIfInventoryIsFull()
         {
-            if(itemList.Count == slotList.Count)
+            int counter = 0;
+            foreach (GameObject slot in slotList)
+            {
+                if (slot.transform.childCount > 0)
+                {
+                    counter++;
+                }
+
+            }
+            if (counter == slotList.Count)
             {
                 inventoryIsFull = true;
                 return true;
             }
             else
             {
-                inventoryIsFull = false;
                 return false;
             }
         }
@@ -113,7 +117,7 @@ namespace EC
                     return slot;
                 }
             }
-            return null;
+            return new GameObject();
         }
 
     
