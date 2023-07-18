@@ -40,10 +40,7 @@ namespace EC
                 yRotation += mouseX;
 
                 transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-            }
-
-
-            
+            }            
         }
     }
 }
