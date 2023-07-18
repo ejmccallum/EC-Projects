@@ -59,7 +59,10 @@ namespace EC
             else if (Input.GetKeyDown(KeyCode.I) && inventoryIsOpen)
             {
                 inventoryScreenUI.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
+                if(!CraftingSystem.Instance.craftingScreenIsOpen)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
                 inventoryIsOpen = false;
             }
         }
@@ -73,6 +76,39 @@ namespace EC
 
             itemList.Add(itemName);
 
+        }
+
+        public void RemoveItemFromInventory(string itemName, int amountToRemove)
+        {
+            int counter = amountToRemove;
+
+            for(var i = 0; i < slotList.Count; i++)
+            {
+                if(slotList[i].transform.childCount > 0)
+                {
+                    if(slotList[i].transform.GetChild(0).name == itemName + "(Clone)" && counter > 0)
+                    {
+                        Destroy(slotList[i].transform.GetChild(0).gameObject);
+                        counter--;
+                    }
+                }
+            }
+        }
+
+        public void RefreshInventory()
+        {
+            itemList.Clear();
+            
+            foreach (GameObject slot in slotList)
+            {
+                if (slot.transform.childCount > 0)
+                {
+                    string itemName = slot.transform.GetChild(0).name;
+                    string itemNameWithoutClone = itemName.Substring(0, itemName.Length - 7);
+                    itemList.Add(itemNameWithoutClone);
+                }
+
+            }
         }
 
         public bool CheckIfInventoryIsFull()
