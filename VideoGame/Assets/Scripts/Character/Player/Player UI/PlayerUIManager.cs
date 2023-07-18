@@ -11,8 +11,12 @@ namespace EC
 
 
         public static PlayerUIManager instance{get; set;}
+
         public bool onTarget;
+
         public GameObject interactionUI;
+        public GameObject selectedObject;
+
         Text interactionText;
 
         private void Awake()
@@ -31,7 +35,7 @@ namespace EC
         {
             onTarget = false;
             interactionText = interactionUI.GetComponent<Text>();
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         private void Update()
         {
@@ -47,14 +51,11 @@ namespace EC
                 if(interactableObject && interactableObject.playerInRange)
                 {
                     onTarget = true;
+                    selectedObject = interactableObject.gameObject;
 
                     interactionText.text = interactableObject.GetItemName();
                     interactionUI.SetActive(true);
 
-                    if(interactableObject.isPickup == true)
-                    {
-                        interactableObject.GetAddedToInventoryText();
-                    }
                 }    
                 else
                 {
